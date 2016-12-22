@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
-
 {% block content %}
-{% for item in queryset %}
-	{{ item.name}}
-{% endfor %}
+	<a href={% url 'add_course' %} class="btn" type="button">add items</a>
+	<form method="POST">{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="button">save</button>
+	</form>
+	{% for item in queryset %}
+		{{ item.name}}
+	{% endfor %}
 {% endblock content %}

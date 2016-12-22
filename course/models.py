@@ -6,6 +6,7 @@ from django.db import models
 
 class Courses(models.Model):
 	name = models.CharField(max_length=200)
+	slug = models.SlugField(unique=True)
 	time = models.IntegerField()
 	cost = models.IntegerField()
 
@@ -14,6 +15,22 @@ class Courses(models.Model):
 
 	def __str__(self):
 		return self.name
+
+	def create_slug(instance,new_slug = None):
+		slug = slugify(instance.name)
+		if new_slug is not None:
+			slug = new_slug
+		qs = Courses.objects.filter(slug=slug).order_by("-id")
+		exists = qs.exists()
+
+		if exists:
+			new_slug = "%s-%s" %(slug, qs.first().id)
+			return create_slug(instance, new_slug=new_slug)
+		return slug
+
+	def pre_save_receiver(sender, instance, *args, **kwargs): 
+	    if not instance.slug:
+	        instance.slug = create_slug(instance)
         
 class Course_instructor(models.Model):
 	first_name = models.CharField(max_length=140)
