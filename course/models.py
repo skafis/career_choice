@@ -10,10 +10,10 @@ class Courses(models.Model):
 	cost = models.IntegerField()
 
 	def __unicode__(self):
-        return self.name
+		return self.name
 
-    def __str__(self):
-        return self.name
+	def __str__(self):
+		return self.name
         
 class Course_instructor(models.Model):
 	first_name = models.CharField(max_length=140)
@@ -21,10 +21,10 @@ class Course_instructor(models.Model):
 	specialty = models.CharField(max_length = 200)
 
 	def __unicode__(self):
-        return self.specialty
+	    return self.specialty
 
-    def __str__(self):
-        return self.specialty
+	def __str__(self):
+	    return self.specialty
 
 class Learners(models.Model):
 	first_name = models.CharField(max_length=140)
@@ -32,7 +32,7 @@ class Learners(models.Model):
 	career_intrest = models.CharField(max_length=200)
 
 	def __unicode__(self):
-        return self.career_intrest
+	    return self.career_intrest
 
-    def __str__(self):
-        return self.career_intrest
+	def __str__(self):
+	    return self.career_intrest
